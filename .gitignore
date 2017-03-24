@@ -32,6 +32,7 @@
 npm-debug.log
 testem.log
 /typings
+docker-compose.yml
 
 # e2e
 /e2e/*.js

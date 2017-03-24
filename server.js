@@ -1,8 +1,7 @@
-var ldapsearch = require('./lib/ldapsearch')
+var ldapsearch = require('./lib/ldapsearch');
 var express = require('express');
 var app = express();
-
-const port = 3000;
+var config = require('./lib/config');
 
 app.get('/api/users', function(request, response) {
     try {
@@ -25,8 +24,8 @@ app.get('/api/users/:dn', function(request, response) {
     }
 });
 
-//app.use(express.static('dist'));
+app.use(express.static('dist'));
 
-app.listen(port, function() {
-    console.log('Started on port ' + port);
+app.listen(config.WEB_SERVER_PORT, function() {
+    console.log('Started on port ' + config.WEB_SERVER_PORT);
 });

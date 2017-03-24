@@ -12,25 +12,52 @@ import 'rxjs/add/operator/catch';
 })
 export class AppComponent {
   searchString: string;
-  isLoading: boolean = false;
+  attributeListButtonText = 'Vis attributter';
+  isLoading = false;
+  attributesIsVisible = false;
   users: any[];
   userCount: number;
-
+  getKey = Object.keys;
   constructor(private http: Http) { }
 
-  getUsers(evt) {
-    if (evt) {
-      evt.preventDefault();
-      evt.stopPropagation();
+  clearSearch() {
+    this.searchString = '';
+    this.users = [];
+    this.userCount = 0;
+    this.isLoading = false;
+  }
+
+  isArray(object: any) {
+    return Array.isArray(object);
+  }
+
+  toggleAttributeList() {
+    this.attributesIsVisible = !this.attributesIsVisible;
+    if (this.attributesIsVisible) {
+      this.attributeListButtonText = 'Skjul attributter';
     }
-    this.isLoading = true;
-    this.http.get(`/api/users?q=${this.searchString}`)
-      .map(result => result.json())
-      .catch(error => {console.error(error); return error; })
-      .subscribe((result: any) => {
-        if (result.users) { this.users = result.users; }
-        if (result.user_count) { this.userCount = result.user_count; }
-        this.isLoading = false;
-      });
+    else {
+      this.attributeListButtonText = 'Vis attributter';
+    }
+  }
+  getUsers(evt) {
+    console.log('getUsers');
+    if (this.searchString.length > 1) {
+      this.users = [];
+      this.userCount = 0;
+      if (evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+      }
+      this.isLoading = true;
+      this.http.get(`/api/users?q=${this.searchString}`)
+        .map(result => result.json())
+        .catch(error => {console.error(error); return error; })
+        .subscribe((result: any) => {
+          if (result.users) { this.users = result.users; }
+          if (result.user_count) { this.userCount = result.user_count; }
+          this.isLoading = false;
+        });
+    }
   }
 }
