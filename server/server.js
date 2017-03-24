@@ -24,7 +24,7 @@ app.get('/api/users/:dn', function(request, response) {
     }
 });
 
-app.use(express.static('dist'));
+app.use(express.static('server/public'));
 
 app.listen(config.WEB_SERVER_PORT, function() {
     console.log('Started on port ' + config.WEB_SERVER_PORT);
