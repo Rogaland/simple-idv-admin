@@ -31,9 +31,9 @@ export class AppComponent {
     return Array.isArray(object);
   }
 
-  toggleAttributeList() {
-    this.attributesIsVisible = !this.attributesIsVisible;
-    if (this.attributesIsVisible) {
+  toggleAttributeList(user) {
+    user.attributesIsVisible = !user.attributesIsVisible;
+    if (user.attributesIsVisible) {
       this.attributeListButtonText = 'Skjul attributter';
     }
     else {

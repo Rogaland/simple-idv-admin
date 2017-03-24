@@ -36,12 +36,12 @@
                 <button md-button (click)="toggleAttributeList(user)">{{attributeListButtonText}}</button>
             </md-card-actions>
             <md-card-content>
-                <table *ngIf="attributesIsVisible">
+                <table *ngIf="user.attributesIsVisible">
                     <tbody>
                         <tr *ngFor="let attribute of getKey(user)">
-                            <th *ngIf="attribute != 'controls'">{{attribute}}</th>
-                            <td *ngIf="attribute != 'controls' && !isArray(user[attribute])">{{user[attribute]}}</td>
-                            <td *ngIf="attribute != 'controls' && isArray(user[attribute])">
+                            <th *ngIf="attribute != 'controls' && attribute != 'attributesIsVisible'">{{attribute}}</th>
+                            <td *ngIf="attribute != 'controls' && attribute != 'attributesIsVisible' && !isArray(user[attribute])">{{user[attribute]}}</td>
+                            <td *ngIf="attribute != 'controls' && attribute != 'attributesIsVisible' && isArray(user[attribute])">
                                 <ul>
                                     <li *ngFor="let value of user[attribute]">
                                         {{value}}
